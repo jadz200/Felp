@@ -1,5 +1,5 @@
-from fastapi import Depends, FastAPI, HTTPException
-from backend.endpoint.restaurant import router as restaurant_router 
+from fastapi import  FastAPI 
+from backend.restaurant.endpoints import router as restaurant_router 
 
 app = FastAPI()
 
