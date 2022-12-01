@@ -1,6 +1,4 @@
 from sqlalchemy import TIME, Column, Integer, String
-from sqlalchemy.orm import relationship
-from sqlalchemy.sql import func
 
 from backend.database import Base
 

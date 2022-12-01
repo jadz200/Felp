@@ -5,7 +5,7 @@ from backend.database import engine, get_db
 from backend.restaurant import crud, model
 from backend.restaurant.schema import Restaurant as RestaurantSchema
 
-router = APIRouter(prefix="/restaurant")
+router = APIRouter(prefix="/restaurant", tags=["Restaurant"])
 
 model.Base.metadata.create_all(bind=engine)
 
