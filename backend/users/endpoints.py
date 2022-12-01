@@ -5,7 +5,7 @@ from backend.database import engine, get_db
 from backend.users import crud, model
 from backend.users.schema import UserCredentials, UserSignUp
 
-router = APIRouter(prefix="/user", tags=["user"])
+router = APIRouter(prefix="/user", tags=["User"])
 
 model.Base.metadata.create_all(bind=engine)
 
@@ -24,7 +24,7 @@ def read_restaurants(user_id, db: Session = Depends(get_db)):
 
 
 @router.post("/sign_up")
-def add_user(user: UserSignUp, db: Session = Depends(get_db)):
+def sign_up(user: UserSignUp, db: Session = Depends(get_db)):
     if user.confirm_password != user.password:
         return "password don't match"
     user_credentials = UserCredentials(email=user.email, password=user.password)
@@ -32,7 +32,7 @@ def add_user(user: UserSignUp, db: Session = Depends(get_db)):
 
 
 @router.post("/sign_in")
-def read_restaurants(user: UserCredentials, db: Session = Depends(get_db)):
+def sign_in(user: UserCredentials, db: Session = Depends(get_db)):
 
     db_user = crud.get_user_email(db, user.email)
     if db_user is None:
@@ -40,15 +40,3 @@ def read_restaurants(user: UserCredentials, db: Session = Depends(get_db)):
     if db_user.__dict__["password"] != user.password:
         raise HTTPException(status_code=400, detail="Wrong Password")
     return db_user
-
-
-# @router.put("/update/{restaurant_id}")
-# def update_restaurant(
-#     restaurant_id: int, restaurant: RestaurantSchema, db: Session = Depends(get_db)
-# ):
-#     return crud.update_restaurant(db, restaurant_id, restaurant)
-
-
-# @router.delete("/delete/{restaurant_id}")
-# def delete_restaurant(restaurant_id: int, db: Session = Depends(get_db)):
-#     return crud.delete_restaurant(db, restaurant_id)
