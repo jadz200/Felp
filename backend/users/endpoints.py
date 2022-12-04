@@ -28,6 +28,9 @@ def sign_up(user: UserSignUp, db: Session = Depends(get_db)):
     if user.confirm_password != user.password:
         return "password don't match"
     user_credentials = UserCredentials(email=user.email, password=user.password)
+    db_user = crud.get_user_email(db, user.email)
+    if db_user is not None:
+        raise HTTPException(status_code=400, detail="Already used email")
     return crud.add_user(db, user_credentials)
 
 
