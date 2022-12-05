@@ -10,3 +10,4 @@ class Restaurant(BaseModel):
     opening: time = Field()
     closing: time = Field()
     rating: int = Field()
+    category: str = Field()

@@ -25,4 +25,5 @@ def get_review_restaurant(restaurant_id, db: Session = Depends(get_db)):
 
 @router.post("/add")
 def add_review(review: ReviewSchema, db: Session = Depends(get_db)):
-    return crud.add_review(db, review)
+    db_review = crud.add_review(db, review)
+    return db_review

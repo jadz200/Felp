@@ -13,9 +13,16 @@ class User(BaseModel):
 class UserSignUp(BaseModel):
     email: str = Field()
     password: str = Field()
-    confirm_password: str = Field()
+    username: str = Field()
 
 
 class UserCredentials(BaseModel):
     email: str = Field()
     password: str = Field()
+
+
+class UserEdit(BaseModel):
+    username: str = Field()
+    gender: str = Field()
+    age: int = Field()
+    bio: str = Field()

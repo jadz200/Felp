@@ -1,4 +1,4 @@
-from sqlalchemy import TIME, Column, Integer, String
+from sqlalchemy import BLOB, TIME, Column, Integer, String
 
 from backend.database import Base
 
@@ -13,3 +13,4 @@ class Restaurant(Base):
     opening = Column(TIME)
     closing = Column(TIME)
     rating = Column(Integer)
+    category = Column(String)

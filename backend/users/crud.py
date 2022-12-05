@@ -1,7 +1,9 @@
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from backend.users.model import User as UserModel
-from backend.users.schema import UserCredentials
+from backend.users.schema import User as UserSchema
+from backend.users.schema import UserCredentials, UserEdit
 
 
 def get_users(db: Session):
@@ -22,3 +24,19 @@ def get_user_id(db: Session, user_id: int):
 
 def get_user_email(db: Session, email: str):
     return db.query(UserModel).filter(email == UserModel.email).first()
+
+
+def update_user(db: Session, user_id: int, user: UserEdit):
+    db_item = get_user_id(db, user_id)
+
+    if db_item is None:
+        raise HTTPException(
+            status_code=404, detail=f"Restaurant with id {id} not found"
+        )
+    updated_data = user.dict(exclude_unset=True)
+    db.query(UserModel).filter(user_id == UserModel.id).update(
+        updated_data, synchronize_session=False
+    )
+    db.commit()
+
+    return user
