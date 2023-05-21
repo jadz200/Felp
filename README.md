@@ -1,4 +1,4 @@
-# Restaurant Viewer Backend Application
+# Felp: Restaurant Viewer Backend Application
 
 This repository contains the backend application for a restaurant viewer using FastAPI. The application provides an API for retrieving information about various restaurants, including their menus, locations, and reviews.
 
